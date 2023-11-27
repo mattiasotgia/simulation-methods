@@ -1,0 +1,49 @@
+% !TEX root = ../main.tex
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[italian]{babel}
+\usepackage[babel=true]{microtype}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{siunitx}
+\usepackage{physics}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage[caption = false]{subfig}
+
+\usepackage{tikz}
+
+\usepackage[american, useregional]{datetime2}
+
+
+
+% Hyperref setup, hidelinks in definition.
+\hypersetup{
+    pdfauthor={M Sotgia <s4942225@studenti.unige.it>},
+    pdfcreator={Latex/UNIGE (\DTMnow)},
+    pdftitle={Ok degree però short},
+    pdfsubject={Shock Waves}
+}
+
+% SIUNITX
+\sisetup{
+    per-mode=symbol,
+    separate-uncertainty=false
+}
+
+% Tikz libraries
+\usetikzlibrary{calc, angles, arrows, arrows.meta, quotes}
+
+
+% \renewcommand{\descriptionlabel}[1]{%
+%   \hspace\labelsep \upshape\bfseries #1%
+% }
+
+\usepackage{algorithmicx, algpseudocode}
+
+\makeatletter
+\let\cat@comma@active\@empty
+\makeatother
