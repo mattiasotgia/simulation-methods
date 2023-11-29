@@ -5,9 +5,10 @@ format: jb-book
 root: content/intro
 title: Introduzione
 parts:
-- caption: MCMC
+- caption: Lezioni
   chapters:
-  - file: content/notebooks
+  - file: content/lectures/notebooks
+- caption: Approfondimenti
 - caption: Riferimenti bibliografici
   chapters:
   - file: content/zbiblio
