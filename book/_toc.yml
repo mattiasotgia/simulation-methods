@@ -10,5 +10,5 @@ parts:
   - file: content/notebooks
 - caption: Riferimenti bibliografici
   chapters:
-  - file: contents/zbiblio
+  - file: content/zbiblio
   
