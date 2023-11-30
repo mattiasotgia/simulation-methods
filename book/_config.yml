@@ -17,11 +17,6 @@ exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints", LICENSE
 execute:
   execute_notebooks: auto
 
-# Define the name of the latex output file for PDF builds
-latex:
-  latex_documents:
-    targetname: book.tex
-
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
   - references/references.bib
@@ -36,8 +31,8 @@ html:
   # favicon: images/logo/favicon.ico
   baseurl: https://mattiasotgia.github.io/simulation-methods
   home_page_in_navbar: true
-  use_repository_button: true
-  use_issues_button: true
+  use_repository_button: false
+  use_issues_button: false
   extra_navbar: Powered by <a href="https://jupyterbook.org">Jupyter Book</a>  # Will be displayed underneath the left navbar.
   extra_footer: |
     <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://mattiasotgia.github.io/simulation-methods">Metodi di Simulazione Applicati alla Fisica</a> by <span property="cc:attributionName">M. Sotgia</span> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
