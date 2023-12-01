@@ -12,4 +12,9 @@ parts:
 - caption: Riferimenti bibliografici
   chapters:
   - file: content/zbiblio
-  
+  - caption: Contatti esterni
+  chapters:
+  - url: https://mattiasotgia.github.io/
+    caption: Mattia Sotgia
+  - url: mailto:mattiasotgia2@gmail.com
+    caption: <mattiasotgia2@gmail.com>
