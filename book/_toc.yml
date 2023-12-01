@@ -15,6 +15,6 @@ parts:
   - caption: Contatti esterni
   chapters:
   - url: https://mattiasotgia.github.io/
-    caption: Mattia Sotgia
+    title: Mattia Sotgia
   - url: mailto:mattiasotgia2@gmail.com
-    caption: <mattiasotgia2@gmail.com>
+    title: <mattiasotgia2@gmail.com>
