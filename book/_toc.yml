@@ -12,10 +12,10 @@ parts:
 - caption: Riferimenti bibliografici
   chapters:
   - file: content/zbiblio
-  - caption: Contatti esterni
-    chapters:
-    - url: https://mattiasotgia.github.io/
-      title: Mattia Sotgia
-    - url: https://twitter.com/mattiasotgia1
-      title: '@mattiasotgia1 (twitter)'
+- caption: Contatti esterni
+  chapters:
+  - url: https://mattiasotgia.github.io/
+    title: Mattia Sotgia
+  - url: https://twitter.com/mattiasotgia1
+    title: '@mattiasotgia1 (twitter)'
 
