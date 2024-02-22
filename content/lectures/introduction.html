@@ -333,7 +333,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-generazione-monte-carlo-mc">Metodi di generazione Monte Carlo (MC)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeri-casuali">Numeri casuali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeri-casuali">Numeri casuali</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#campionamento-semplice">Campionamento semplice</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -373,7 +376,7 @@ algoritmo che permetteva di generare numeri casuali con un computer.</p>
 <figure class="margin align-default" id="id1">
 <img alt="../../_images/ATLAS-ttH-eventdisplay.png" src="../../_images/ATLAS-ttH-eventdisplay.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">ATLAS Event display (<span class="math notranslate nohighlight">\(\mathrm{t\bar t H}\)</span> event)</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">ATLAS Event display (for a <span class="math notranslate nohighlight">\(\mathrm{t\bar t H}\)</span> event)</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In fisica delle particelle (nuclear and sub-nuclear physics)</p>
@@ -392,14 +395,65 @@ algoritmo che permetteva di generare numeri casuali con un computer.</p>
 <li><p>Deve avere periodo di ripetizione estremamente lungo</p></li>
 <li><p>Deve essere sufficentemente veloce (sopratutto per utilizzo in particle physics, LHC)</p></li>
 </ol>
+<p>Assumiamo adesso di possedere un generatore di numeri casuali, con le proprietà precedenti, e che sia tale per cui</p>
+<div class="math notranslate nohighlight">
+\[
+    \eta \in [0, 1), \quad p(\eta) = 1, \quad \int_0^1 p(\eta) d \eta = 1.
+\]</div>
 <p>Dalla generazione di numeri casuali, ci interessa allora poter generare distribuzioni continue, e già abbiamo visto alcuni metodi</p>
 <ul class="simple">
-<li><p>Inversione</p></li>
-<li><p>Reiezione (senza campionamento)</p></li>
-<li><p>Reiezione (con campionamento)</p></li>
-<li><p>Importance sampling</p></li>
+<li><p>Inversione</p>
+<ul>
+<li><p>Molto utilizzato per funzioni integramìbili,</p></li>
+<li><p>Garantisce l’efficenza massima</p></li>
+</ul>
+</li>
+<li><p>Reiezione (senza campionamento, anche detto reiezione semplice)</p>
+<ul>
+<li><p>Valido per qualsiasi funzione</p></li>
+<li><p>Efficenza che però dipende dalla funzione che si sta considerando (quindi non è prevedibile a priori, ma è <em>model dependent</em>)</p></li>
+</ul>
+</li>
+<li><p>Reiezione (con campionamento/importance sampling)</p>
+<ul>
+<li><p>Valido anche questo per tutte le funzioni</p></li>
+<li><p>Rispetto all’algoritmo di reiezione può avere efficenza migliore, ma comunque resta <em>omdel dependent</em></p></li>
+</ul>
+</li>
 </ul>
 <p>Esiste ancora un modo di generare, detto campionamento semplice.</p>
+<section id="campionamento-semplice">
+<h3>Campionamento semplice<a class="headerlink" href="#campionamento-semplice" title="Link to this heading">#</a></h3>
+<p>È un metodo molto importante, perché permette di generare qualsiasi distribuzione/PDF.</p>
+<p>Si parte estraendo un valore <span class="math notranslate nohighlight">\(x_i\)</span> in maniera uniforme in <span class="math notranslate nohighlight">\([a,b]\)</span>, che è l’intervallo in cui si vuole fare la generazione. I valori sono tutti tenuti, ma sono <em>pesati</em> con <span class="math notranslate nohighlight">\(w_i = f(x_i)\)</span>.</p>
+<p>La differenza principale riguarda questa volta come è calcolato l’errore sulla distribuzione ottenuta. Questo non può essere trattato come errore poissoniano (ovvero errore di un conteggio semplice).</p>
+<div class="tip admonition">
+<p class="admonition-title">Come trattiamo allora l’errore in questo caso?</p>
+<p>Suppongo che un dato bin dell’istogramma sia composto da N valori, pesati con <span class="math notranslate nohighlight">\(w_i\)</span>. Allora l’altezza del bin e la sua varianza saranno</p>
+<div class="math notranslate nohighlight">
+\[
+    S = \sum_{i=1}^N w_i \qquad \sigma_S^2 = \sum_{i=1}^N w_i^2.
+\]</div>
+<p>È utile riscrivere la varianza di S in termini di fluttuazioni del numero di eventi e del peso degli eventi, per osservare alcune caratteristiche di questa descrizione.</p>
+<p>La deviazione standard dei pesi è data come</p>
+<div class="math notranslate nohighlight">
+\[
+    \sigma_w^2 = \langle w^2\rangle - \langle w\rangle^2,
+\]</div>
+<p>dove si ha che <span class="math notranslate nohighlight">\(\langle w^2\rangle = \sigma_S^2 /N\)</span> e <span class="math notranslate nohighlight">\(\langle w\rangle= S/N\)</span>.</p>
+<p>Allora avremo che</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\sigma_S^2}{S^2} = \langle w\rangle^2 \frac{N}{S^2} = \frac{N}{S^2} \left( \sigma_w^2 + \langle w\rangle^2 \right) = \frac{N}{S^2} \frac{S^2}{N^2} \left( \frac{\sigma_w^2}{\langle w\rangle^2} + 1 \right),
+\]</div>
+<p>ovvero che</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\sigma_S}{S} = \frac{1}{\sqrt{N}}\sqrt{\frac{\sigma_w^2}{\langle w\rangle^2} + 1}.
+\]</div>
+<p>Questa riscrittura, che non cambia in alcun modo il risultato che infatti è semplicemente una riscrittura della relazione precedente, rende esplicito il contributo del numero di conteggi e della varianza dei pesi. Se infatti si considerano tutti pesi uguali (e non necessariamenti uguali ad 1) si ottiene che <span class="math notranslate nohighlight">\(\sigma_w = 0\)</span>, per cui si ottiene che la deviazione standard dei dati è indipendente dal peso che questi hanno.</p>
+</div>
+</section>
 </section>
 </section>
 
@@ -468,7 +522,10 @@ algoritmo che permetteva di generare numeri casuali con un computer.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-generazione-monte-carlo-mc">Metodi di generazione Monte Carlo (MC)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeri-casuali">Numeri casuali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeri-casuali">Numeri casuali</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#campionamento-semplice">Campionamento semplice</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
