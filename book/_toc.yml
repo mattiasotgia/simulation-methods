@@ -7,7 +7,7 @@ title: Introduzione
 parts:
 - caption: Lezioni
   chapters:
-  - file: content/lectures/notebook
+  - file: content/lectures/introduction
 # - caption: Approfondimenti
 - caption: Riferimenti bibliografici
   chapters:
