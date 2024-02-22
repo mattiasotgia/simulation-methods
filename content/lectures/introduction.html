@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Prima lezione &#8212; Metodi di Simulazione Applicati alla Fisica</title>
+    <title>Introduzione &#8212; Metodi di Simulazione Applicati alla Fisica</title>
   
   
   
@@ -57,8 +57,10 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/lectures/notebook';</script>
-    <link rel="canonical" href="https://mattiasotgia.github.io/simulation-methods/content/lectures/notebook.html" />
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/lectures/introduction';</script>
+    <link rel="canonical" href="https://mattiasotgia.github.io/simulation-methods/content/lectures/introduction.html" />
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -172,7 +174,7 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lezioni</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Prima lezione</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduzione</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Riferimenti bibliografici</span></p>
 <ul class="nav bd-sidenav">
@@ -236,7 +238,7 @@
       
       
       
-      <li><a href="../../_sources/content/lectures/notebook.ipynb" target="_blank"
+      <li><a href="../../_sources/content/lectures/introduction.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -307,7 +309,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -318,11 +322,20 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Prima lezione</h1>
+    <h1>Introduzione</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-generazione-monte-carlo-mc">Metodi di generazione Monte Carlo (MC)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeri-casuali">Numeri casuali</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -332,8 +345,62 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="prima-lezione">
-<h1>Prima lezione<a class="headerlink" href="#prima-lezione" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduzione">
+<h1>Introduzione<a class="headerlink" href="#introduzione" title="Link to this heading">#</a></h1>
+<section id="metodi-di-generazione-monte-carlo-mc">
+<h2>Metodi di generazione Monte Carlo (MC)<a class="headerlink" href="#metodi-di-generazione-monte-carlo-mc" title="Link to this heading">#</a></h2>
+<p>È un metodo utilizzato in un sacco di branche della fisica, dalla fisica delle particelle alla fisica della materia, è uno strumento che nasce negli anni ‘40, ed ha una continua evoluzione.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Le origini del Metodo di Monte Carlo risalgono alla metà degli anni 40 nell’ambito del Progetto Manhattan.
+I formalizzatori del metodo sono Enrico Fermi, John von Neumann e Stanislaw Marcin Ulam, il nome Monte
+Carlo fu inventato in seguito da Nicholas Constantine Metropolis in riferimento alla nota tradizione nei giochi
+d’azzardo dello stato omonimo nel sud della Francia (e in particolare alla roulette in cui i numeri sono estratti a
+caso).</p>
+<p>Pare che l’idea venne a Ulam mentre era convalescente da una malattia. Per passare il tempo giocava a un
+solitario con le carte e si chiese quale fosse la probabilità di completarlo correttamente. Le regole del solitario
+rendevano difficile il calcolo di questa probabilità. Tuttavia pensò che si sarebbero potute simulare con un
+computer molte disposizioni casuali di un mazzo di carte e controllare in quanti di questi casi si riusciva a
+completare il solitario. In questo modo si poteva calcolare la probabilità di vincere al solitario in modo empirico.
+Ulam ne parlò con Von Neumann il quale comprese il potenziale di questa intuizione e svilupp`o il primo
+algoritmo che permetteva di generare numeri casuali con un computer.</p>
+</aside>
+<p>In fisica della materia, sopratutto in fisica teorica della materia, si parla di</p>
+<ul class="simple">
+<li><p>Calcolare proprietà di equilibrio di sistemi a molte particelle (N-body). In particolare eccetto il caso di interazioni armoniche, è praticamente impossibile ottenere una soluzione analitica, e quindi è obbligatorio utilizzare strumenti numerici e metodi numerici.</p></li>
+<li><p>Processi stocastici (rndm walk, crescita di cristalli).</p></li>
+</ul>
+<figure class="margin align-default" id="id1">
+<img alt="../../_images/ATLAS-ttH-eventdisplay.png" src="../../_images/ATLAS-ttH-eventdisplay.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">ATLAS Event display (<span class="math notranslate nohighlight">\(\mathrm{t\bar t H}\)</span> event)</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In fisica delle particelle (nuclear and sub-nuclear physics)</p>
+<ul class="simple">
+<li><p>Simulation of the initial process (of which the out state is known by experimental data)</p></li>
+<li><p>Simulazione dell’interazione con un rivelatore</p></li>
+<li><p>Produzione di eventi identici a quelli veri, per creare maggiore statistica, e/o per progettare/ottiimizare/controllare il rivelatore.</p></li>
+</ul>
+</section>
+<section id="numeri-casuali">
+<h2>Numeri casuali<a class="headerlink" href="#numeri-casuali" title="Link to this heading">#</a></h2>
+<p>Centrale negli algoritmi di MC è la necessità di poter <strong>generare</strong> un numero casuale. In generale questo generatore deve avere alcune proprietà, alcune convensionali altre necessarie</p>
+<ol class="arabic simple">
+<li><p>Deve generare in <span class="math notranslate nohighlight">\([0, 1)\)</span>.</p></li>
+<li><p>Deve generare valori che non rispettano nessun pattern apparente (<span class="math notranslate nohighlight">\(x_n\)</span> è scorrelato a <span class="math notranslate nohighlight">\(x_{n-1}\)</span>).</p></li>
+<li><p>Deve avere periodo di ripetizione estremamente lungo</p></li>
+<li><p>Deve essere sufficentemente veloce (sopratutto per utilizzo in particle physics, LHC)</p></li>
+</ol>
+<p>Dalla generazione di numeri casuali, ci interessa allora poter generare distribuzioni continue, e già abbiamo visto alcuni metodi</p>
+<ul class="simple">
+<li><p>Inversione</p></li>
+<li><p>Reiezione (senza campionamento)</p></li>
+<li><p>Reiezione (con campionamento)</p></li>
+<li><p>Importance sampling</p></li>
+</ul>
+<p>Esiste ancora un modo di generare, detto campionamento semplice.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -391,7 +458,21 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-generazione-monte-carlo-mc">Metodi di generazione Monte Carlo (MC)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeri-casuali">Numeri casuali</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
