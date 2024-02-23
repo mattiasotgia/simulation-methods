@@ -77,7 +77,7 @@ $$
 
 Quello che invece voglio ottenere è di poter calcolare delle catene in cui l'estrazione è condizionata dai risultati precedenti. Non vorrei però che il risultato sia inlfuenzato da tutte le condizioni precedenti dall'inizio dei tempi, ma solo dalla condizione immediatamente precedente. 
 
-### Teorema della probabilità congiunta
+##### Teorema della probabilità congiunta
 
 :::{admonition} Da sistemare
 :class: warning
@@ -106,6 +106,31 @@ $$
 Se inoltre $P_C^{(m)}$ ha la stessa forma indipendentemente da $m$, allora chiameremo questa catena una catena di Markov omogenea. Questo sarà il caso principale che tratteremo, ponendoci all'equilibrio termico. 
 
 
+:::{admonition} Cambio di notazione
+:class: warning
+Da questo punto considereremo un cambio di notazione. 
+
+Chiamiamo la probabilità di estrarre lo stato $i$ all'inizio come 
+
+$$
+    p^{(0)}(i_0) \to p_i ^{(0)}.
+$$
+
+Inoltre avremo che 
+
+$$
+    P_C^{(M)} (j | i) \to \pi_{ij}
+$$
+
+Con questa nuova notazione osserviamo che $p_i^{(0)}$ è un vettore con $\mathcal S$ componenti, mentre $\pi_{ij}$ è una matrice di dimensione $\mathcal S \times \mathcal S$. Valgono in questa nuova notazione le condizioni 
+
+
+$$
+    \sum_{i=1}^{\mathcal S} p_i^{(0)} = 1 \quad sum_{j=1}^{\mathcal S} \pi_{ij} = 1, 
+$$
+
+corrispondenti alla normalizzazione delle probabilità e anche delle probabilità di transizione. 
+:::
 
 
 

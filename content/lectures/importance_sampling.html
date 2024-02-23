@@ -432,6 +432,26 @@ document.write(`
     p^{(0)} (i_0)
 \]</div>
 <p>Se inoltre <span class="math notranslate nohighlight">\(P_C^{(m)}\)</span> ha la stessa forma indipendentemente da <span class="math notranslate nohighlight">\(m\)</span>, allora chiameremo questa catena una catena di Markov omogenea. Questo sarà il caso principale che tratteremo, ponendoci all’equilibrio termico.</p>
+<div class="warning admonition">
+<p class="admonition-title">Cambio di notazione</p>
+<p>Da questo punto considereremo un cambio di notazione.</p>
+<p>Chiamiamo la probabilità di estrarre lo stato <span class="math notranslate nohighlight">\(i\)</span> all’inizio come</p>
+<div class="math notranslate nohighlight">
+\[
+    p^{(0)}(i_0) \to p_i ^{(0)}.
+\]</div>
+<p>Inoltre avremo che</p>
+<div class="math notranslate nohighlight">
+\[
+    P_C^{(M)} (j | i) \to \pi_{ij}
+\]</div>
+<p>Con questa nuova notazione osserviamo che <span class="math notranslate nohighlight">\(p_i^{(0)}\)</span> è un vettore con <span class="math notranslate nohighlight">\(\mathcal S\)</span> componenti, mentre <span class="math notranslate nohighlight">\(\pi_{ij}\)</span> è una matrice di dimensione <span class="math notranslate nohighlight">\(\mathcal S \times \mathcal S\)</span>. Valgono in questa nuova notazione le condizioni</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{i=1}^{\mathcal S} p_i^{(0)} = 1 \quad sum_{j=1}^{\mathcal S} \pi_{ij} = 1, 
+\]</div>
+<p>corrispondenti alla normalizzazione delle probabilità e anche delle probabilità di transizione.</p>
+</div>
 </section>
 </section>
 </section>
