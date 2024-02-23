@@ -333,7 +333,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catene-di-markov">2.1. Catene di Markov</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catene-di-markov">2.1. Catene di Markov</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-della-probabilita-congiunta">2.1.1. Teorema della probabilità congiunta</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -375,9 +378,61 @@ document.write(`
 \[
     I\simeq \frac VM \sum_{i=1}^M A({\bf x_i}).
 \]</div>
-<p>Chiameremmo questo caso il caso di <strong>campionamento semplice</strong>, e chiameremo invece ogni altro caso <strong>importance sampling</strong>, dove la distribuzione non è scelta a caso ma sarà scelta in funzione del modello di <span class="math notranslate nohighlight">\(A({\bf x})\)</span>.</p>
 <section id="catene-di-markov">
 <h2><span class="section-number">2.1. </span>Catene di Markov<a class="headerlink" href="#catene-di-markov" title="Link to this heading">#</a></h2>
+<p>Il modello precedente può essere molto migliorato. Abbiamo innanzitutto compreso che</p>
+<ol class="arabic simple">
+<li><p>Lo spazio sarà a molte dimensione (tratteremo lo spazio delle fasi secondo la meccanica lagrangiana e hamiltoniana, quindi con un numero enorme di dimensioni)</p></li>
+<li><p>Dovremo avere probabilità che in realtà non sono casuali, ma funzioni <span class="math notranslate nohighlight">\(p({\bf x})\)</span> fornite dalla fisica.</p></li>
+</ol>
+<p>Vedremo quindi quella che prende il nome dei teoria delle catene di Markov. La tratteremo nel suo formalismo (semi) completo. Rinunceremo però a considerare spazi infiniti, ma avremmo uno spazio delle fasi <strong>discreto</strong> e <strong>finito</strong>. Questo ha molto senso perché il calcolo numerico è comunque un calcolo discreto e finito.</p>
+<p>Consideriamo un insieme di <span class="math notranslate nohighlight">\(\mathcal S\)</span> stati, e l’indice sarà <span class="math notranslate nohighlight">\(i = 1, \dots, \mathcal S\)</span>. Su questo spazio di stati compieremo una <strong>catena di estrazioni</strong>. Ogni estrazione corrispondere a scegliere uno degli stati del sistema, e si tratta di estrazioni con re-immissione. Consideriamo <span class="math notranslate nohighlight">\(0, \dots, M\)</span> estrazioni, che sommeranno ad un totale di <span class="math notranslate nohighlight">\(M+1\)</span> estrazioni totali.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Senza dimostrarlo formalmente, è intuitivo capire che queste estrazioni sono in realtà indipendenti (ovvero scorrelate) e equiprobabili.</p>
+</aside>
+<p>Nonostante le Markov Chains siano scorrelate, quello che in realtà a noi serve è una catena correlata (sarebbe troppo semplice), e vogliamo che per motivi di utilizzazione pratica questa correlazione sia la più semplice possibile.</p>
+<p>Nella catena di estrazioni estrarremo</p>
+<div class="math notranslate nohighlight">
+\[
+    i_0, i_1, \dots, i_M.
+\]</div>
+<p>La descrizione di questa estrazione mi dice che esiste la probabilità <strong>congiunta</strong> a <span class="math notranslate nohighlight">\(M+1\)</span> valori</p>
+<div class="math notranslate nohighlight">
+\[
+    p^{(M)} (i_0, i_1, \dots, i_M).
+\]</div>
+<p>In assenza di correlazioni avremo che</p>
+<div class="math notranslate nohighlight">
+\[
+    p^{(M)} (i_0, i_1, \dots, i_M) = p^{(1)} (i_0) p^{(1)} (i_1) p^{(1)} (i_2) \dots p^{(1)} (i_M)
+\]</div>
+<p>Quello che invece voglio ottenere è di poter calcolare delle catene in cui l’estrazione è condizionata dai risultati precedenti. Non vorrei però che il risultato sia inlfuenzato da tutte le condizioni precedenti dall’inizio dei tempi, ma solo dalla condizione immediatamente precedente.</p>
+<section id="teorema-della-probabilita-congiunta">
+<h3><span class="section-number">2.1.1. </span>Teorema della probabilità congiunta<a class="headerlink" href="#teorema-della-probabilita-congiunta" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">Da sistemare</p>
+<p>Appunti incompleti</p>
+</div>
+<p>È possibile esprimere la probabilità congiunta in termini di una probabilità condizionata</p>
+<div class="math notranslate nohighlight">
+\[
+    p^{(M)} (i_0, i_1, \dots, i_M) = P_C^{(M)} (i_M | i_0, i_1, \dots, i_{M-1}) p^{(M-1)} (i_0, i_1, \dots, i_{M-1})
+\]</div>
+<p>Iterando allora ottengo che</p>
+<div class="math notranslate nohighlight">
+\[
+    p^{(M)} (i_0, i_1, \dots, i_M) = 
+    P_C^{(M)} (i_M | i_{M-1}) 
+    P_C^{(M-1)} (i_{M-1} | i_{M-2}) 
+    P_C^{(M-2)} (i_{M-2} | i_{M-3}) 
+    P_C^{(M-3)} (i_{M-3} | i_{M-4}) 
+    \dots 
+    P_C^{(1)} (i_{1} | i_{0}) 
+    p^{(0)} (i_0)
+\]</div>
+<p>Se inoltre <span class="math notranslate nohighlight">\(P_C^{(m)}\)</span> ha la stessa forma indipendentemente da <span class="math notranslate nohighlight">\(m\)</span>, allora chiameremo questa catena una catena di Markov omogenea. Questo sarà il caso principale che tratteremo, ponendoci all’equilibrio termico.</p>
+</section>
 </section>
 </section>
 
@@ -445,7 +500,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catene-di-markov">2.1. Catene di Markov</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catene-di-markov">2.1. Catene di Markov</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-della-probabilita-congiunta">2.1.1. Teorema della probabilità congiunta</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
