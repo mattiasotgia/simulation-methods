@@ -36,8 +36,98 @@ $$
     I\simeq \frac VM \sum_{i=1}^M A({\bf x_i}).
 $$
 
+:::{admonition} 
+:class: attention
 Chiameremmo questo caso il caso di __campionamento semplice__, e chiameremo invece ogni altro caso __importance sampling__, dove la distribuzione non è scelta a caso ma sarà scelta in funzione del modello di $A({\bf x})$. 
+:::
 
 ## Catene di Markov
+
+Il modello precedente può essere molto migliorato. Abbiamo innanzitutto compreso che 
+ 1. Lo spazio sarà a molte dimensione (tratteremo lo spazio delle fasi secondo la meccanica lagrangiana e hamiltoniana, quindi con un numero enorme di dimensioni)
+ 2. Dovremo avere probabilità che in realtà non sono casuali, ma funzioni $p({\bf x})$ fornite dalla fisica.
+
+Vedremo quindi quella che prende il nome dei teoria delle catene di Markov. La tratteremo nel suo formalismo (semi) completo. Rinunceremo però a considerare spazi infiniti, ma avremmo uno spazio delle fasi __discreto__ e __finito__. Questo ha molto senso perché il calcolo numerico è comunque un calcolo discreto e finito. 
+
+Consideriamo un insieme di $\mathcal S$ stati, e l'indice sarà $i = 1, \dots, \mathcal S$. Su questo spazio di stati compieremo una __catena di estrazioni__. Ogni estrazione corrispondere a scegliere uno degli stati del sistema, e si tratta di estrazioni con re-immissione. Consideriamo $0, \dots, M$ estrazioni, che sommeranno ad un totale di $M+1$ estrazioni totali. 
+
+:::{margin}
+Senza dimostrarlo formalmente, è intuitivo capire che queste estrazioni sono in realtà indipendenti (ovvero scorrelate) e equiprobabili.
+:::
+
+Nonostante le Markov Chains siano scorrelate, quello che in realtà a noi serve è una catena correlata (sarebbe troppo semplice), e vogliamo che per motivi di utilizzazione pratica questa correlazione sia la più semplice possibile. 
+
+Nella catena di estrazioni estrarremo 
+
+$$
+    i_0, i_1, \dots, i_M.
+$$
+
+La descrizione di questa estrazione mi dice che esiste la probabilità __congiunta__ a $M+1$ valori 
+
+$$
+    p^{(M)} (i_0, i_1, \dots, i_M).
+$$
+
+In assenza di correlazioni avremo che 
+
+$$
+    p^{(M)} (i_0, i_1, \dots, i_M) = p^{(1)} (i_0) p^{(1)} (i_1) p^{(1)} (i_2) \dots p^{(1)} (i_M)
+$$
+
+Quello che invece voglio ottenere è di poter calcolare delle catene in cui l'estrazione è condizionata dai risultati precedenti. Non vorrei però che il risultato sia inlfuenzato da tutte le condizioni precedenti dall'inizio dei tempi, ma solo dalla condizione immediatamente precedente. 
+
+### Teorema della probabilità congiunta
+
+:::{admonition} Da sistemare
+:class: warning
+Appunti incompleti
+:::
+
+È possibile esprimere la probabilità congiunta in termini di una probabilità condizionata 
+
+$$
+    p^{(M)} (i_0, i_1, \dots, i_M) = P_C^{(M)} (i_M | i_0, i_1, \dots, i_{M-1}) p^{(M-1)} (i_0, i_1, \dots, i_{M-1})
+$$
+
+Iterando allora ottengo che 
+
+$$
+    p^{(M)} (i_0, i_1, \dots, i_M) = 
+    P_C^{(M)} (i_M | i_{M-1}) 
+    P_C^{(M-1)} (i_{M-1} | i_{M-2}) 
+    P_C^{(M-2)} (i_{M-2} | i_{M-3}) 
+    P_C^{(M-3)} (i_{M-3} | i_{M-4}) 
+    \dots 
+    P_C^{(1)} (i_{1} | i_{0}) 
+    p^{(0)} (i_0)
+$$
+
+Se inoltre $P_C^{(m)}$ ha la stessa forma indipendentemente da $m$, allora chiameremo questa catena una catena di Markov omogenea. Questo sarà il caso principale che tratteremo, ponendoci all'equilibrio termico. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
