@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduzione &#8212; Metodi di Simulazione Applicati alla Fisica</title>
+    <title>1. Introduzione &#8212; Metodi di Simulazione Applicati alla Fisica</title>
   
   
   
@@ -64,7 +64,7 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Riferimenti bibliografici" href="../zbiblio.html" />
+    <link rel="next" title="2. Importance sampling (Markov Chain Monte Carlo)" href="importance_sampling.html" />
     <link rel="prev" title="Metodi di Simulazione applicati alla Fisica" href="../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -174,7 +174,8 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lezioni</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduzione</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="importance_sampling.html">2. Importance sampling (Markov Chain Monte Carlo)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Riferimenti bibliografici</span></p>
 <ul class="nav bd-sidenav">
@@ -332,9 +333,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-generazione-monte-carlo-mc">Metodi di generazione Monte Carlo (MC)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeri-casuali">Numeri casuali</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#campionamento-semplice">Campionamento semplice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-generazione-monte-carlo-mc">1.1. Metodi di generazione Monte Carlo (MC)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeri-casuali">1.2. Numeri casuali</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#campionamento-semplice">1.2.1. Campionamento semplice</a></li>
 </ul>
 </li>
 </ul>
@@ -349,9 +350,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduzione">
-<h1>Introduzione<a class="headerlink" href="#introduzione" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">1. </span>Introduzione<a class="headerlink" href="#introduzione" title="Link to this heading">#</a></h1>
 <section id="metodi-di-generazione-monte-carlo-mc">
-<h2>Metodi di generazione Monte Carlo (MC)<a class="headerlink" href="#metodi-di-generazione-monte-carlo-mc" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.1. </span>Metodi di generazione Monte Carlo (MC)<a class="headerlink" href="#metodi-di-generazione-monte-carlo-mc" title="Link to this heading">#</a></h2>
 <p>È un metodo utilizzato in un sacco di branche della fisica, dalla fisica delle particelle alla fisica della materia, è uno strumento che nasce negli anni ‘40, ed ha una continua evoluzione.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -376,7 +377,7 @@ algoritmo che permetteva di generare numeri casuali con un computer.</p>
 <figure class="margin align-default" id="id1">
 <img alt="../../_images/ATLAS-ttH-eventdisplay.png" src="../../_images/ATLAS-ttH-eventdisplay.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">ATLAS Event display (for a <span class="math notranslate nohighlight">\(\mathrm{t\bar t H}\)</span> event)</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">ATLAS Event display (for a <span class="math notranslate nohighlight">\(\mathrm{t\bar t H}\)</span> event)</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In fisica delle particelle (nuclear and sub-nuclear physics)</p>
@@ -387,7 +388,7 @@ algoritmo che permetteva di generare numeri casuali con un computer.</p>
 </ul>
 </section>
 <section id="numeri-casuali">
-<h2>Numeri casuali<a class="headerlink" href="#numeri-casuali" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.2. </span>Numeri casuali<a class="headerlink" href="#numeri-casuali" title="Link to this heading">#</a></h2>
 <p>Centrale negli algoritmi di MC è la necessità di poter <strong>generare</strong> un numero casuale. In generale questo generatore deve avere alcune proprietà, alcune convensionali altre necessarie</p>
 <ol class="arabic simple">
 <li><p>Deve generare in <span class="math notranslate nohighlight">\([0, 1)\)</span>.</p></li>
@@ -423,7 +424,7 @@ algoritmo che permetteva di generare numeri casuali con un computer.</p>
 </ul>
 <p>Esiste ancora un modo di generare, detto campionamento semplice.</p>
 <section id="campionamento-semplice">
-<h3>Campionamento semplice<a class="headerlink" href="#campionamento-semplice" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.2.1. </span>Campionamento semplice<a class="headerlink" href="#campionamento-semplice" title="Link to this heading">#</a></h3>
 <p>È un metodo molto importante, perché permette di generare qualsiasi distribuzione/PDF.</p>
 <p>Si parte estraendo un valore <span class="math notranslate nohighlight">\(x_i\)</span> in maniera uniforme in <span class="math notranslate nohighlight">\([a,b]\)</span>, che è l’intervallo in cui si vuole fare la generazione. I valori sono tutti tenuti, ma sono <em>pesati</em> con <span class="math notranslate nohighlight">\(w_i = f(x_i)\)</span>.</p>
 <p>La differenza principale riguarda questa volta come è calcolato l’errore sulla distribuzione ottenuta. Questo non può essere trattato come errore poissoniano (ovvero errore di un conteggio semplice).</p>
@@ -497,11 +498,11 @@ algoritmo che permetteva di generare numeri casuali con un computer.</p>
       </div>
     </a>
     <a class="right-next"
-       href="../zbiblio.html"
+       href="importance_sampling.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Riferimenti bibliografici</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Importance sampling (Markov Chain Monte Carlo)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -521,9 +522,9 @@ algoritmo che permetteva di generare numeri casuali con un computer.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-generazione-monte-carlo-mc">Metodi di generazione Monte Carlo (MC)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeri-casuali">Numeri casuali</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#campionamento-semplice">Campionamento semplice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-generazione-monte-carlo-mc">1.1. Metodi di generazione Monte Carlo (MC)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeri-casuali">1.2. Numeri casuali</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#campionamento-semplice">1.2.1. Campionamento semplice</a></li>
 </ul>
 </li>
 </ul>

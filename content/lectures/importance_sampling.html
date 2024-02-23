@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Metodi di Simulazione applicati alla Fisica &#8212; Metodi di Simulazione Applicati alla Fisica</title>
+    <title>2. Importance sampling (Markov Chain Monte Carlo) &#8212; Metodi di Simulazione Applicati alla Fisica</title>
   
   
   
@@ -18,51 +18,54 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/index';</script>
-    <link rel="canonical" href="https://mattiasotgia.github.io/simulation-methods/content/index.html" />
-    <link rel="icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Introduzione" href="lectures/introduction.html" />
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/lectures/importance_sampling';</script>
+    <link rel="canonical" href="https://mattiasotgia.github.io/simulation-methods/content/lectures/importance_sampling.html" />
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Riferimenti bibliografici" href="../zbiblio.html" />
+    <link rel="prev" title="1. Introduzione" href="introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -98,7 +101,7 @@
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
-      action="../search.html"
+      action="../../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -124,8 +127,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -142,7 +143,7 @@
 
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="../index.html">
   
   
   
@@ -153,8 +154,8 @@
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Metodi di Simulazione Applicati alla Fisica - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Metodi di Simulazione Applicati alla Fisica - Home"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Metodi di Simulazione Applicati alla Fisica - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Metodi di Simulazione Applicati alla Fisica - Home"/>`);</script>
   
   
 </a></div>
@@ -172,13 +173,13 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lezioni</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="lectures/introduction.html">1. Introduzione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/importance_sampling.html">2. Importance sampling (Markov Chain Monte Carlo)</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduzione</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Importance sampling (Markov Chain Monte Carlo)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Riferimenti bibliografici</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="zbiblio.html">Riferimenti bibliografici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbiblio.html">Riferimenti bibliografici</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contatti esterni</span></p>
 <ul class="nav bd-sidenav">
@@ -238,7 +239,7 @@
       
       
       
-      <li><a href="../_sources/content/index.md" target="_blank"
+      <li><a href="../../_sources/content/lectures/importance_sampling.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +323,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Metodi di Simulazione applicati alla Fisica</h1>
+    <h1>Importance sampling (Markov Chain Monte Carlo)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -332,10 +333,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-corso-in-breve">Il corso in breve</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenuti">Contenuti</a><ul class="nav section-nav flex-column">
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catene-di-markov">2.1. Catene di Markov</a></li>
 </ul>
             </nav>
         </div>
@@ -347,44 +345,39 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="metodi-di-simulazione-applicati-alla-fisica">
-<h1>Metodi di Simulazione applicati alla Fisica<a class="headerlink" href="#metodi-di-simulazione-applicati-alla-fisica" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://doi.org/10.5281/zenodo.10219115"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.10219115.svg" /></a>
-<img alt="GitHub License" src="https://img.shields.io/github/license/mattiasotgia/simulation-methods?color=yellow" />
-<img alt="GitHub Workflow Status (with event)" src="https://img.shields.io/github/actions/workflow/status/mattiasotgia/simulation-methods/deploy.yml" /></p>
-<!---![GitHub release (with filter)](https://img.shields.io/github/v/release/mattiasotgia/simulation-methods?color=magenta)-->
-<p>Note e appunti per il corso di <a class="reference external" href="https://corsi.unige.it/off.f/2023/ins/67330?codcla=9012">Metodi di Simulazione Applicati alla Fisica</a>, presso il Dipartimento di Fisica, <a class="reference external" href="https://unige.it/">Università degli Studi di Genova</a>, tenuto dai professori Fabrizio Parodi e Riccardo Ferrando, il secondo semestre dell’anno accademico 2023/2024, corso di laurea magistrale in Fisica.</p>
-<section id="il-corso-in-breve">
-<h2>Il corso in breve<a class="headerlink" href="#il-corso-in-breve" title="Link to this heading">#</a></h2>
-<aside class="margin sidebar">
-<p class="sidebar-title">Pagina del corso</p>
-<p>La pagina del corso, con i dettagli <a class="reference external" href="https://corsi.unige.it/off.f/2023/ins/67330">corsi.unige.it/off.f/2023/ins/67330</a></p>
-</aside>
-<p>Il corso si prefigge di fornire le conoscenze di base sulle tecniche di simulazione basate sul metodo di Monte Carlo e di applicarle alla fisica della materia e alla fisica delle interazioni fondamentali. Per la fisica della materia si acquisiranno competenze in (i) Simulazione con catene di Markov ed, in particolare, con l’algoritmo di Metropolis, (ii) Simulazione di transizioni di fase nel gas reticolare, (iii) Monte Carlo a tempo continuo per simulazione all’equilibrio e fuori equilibrio., (iv) Simulazione della crescita di aggregati. Frattali.</p>
-<p>Per la fisica delle interazioni fondamentali si acquisiranno competenze in (i) Simulazione del trasporto delle particelle nella materia, (ii) Simulazione dell’interazione e del decadimento di particelle in spazio delle fasi, (iii) Simulazione parametrica di un rivelatore, (iv) Simulazione di un esperimento composto da più rivelatori.</p>
-</section>
-<section id="contenuti">
-<h2>Contenuti<a class="headerlink" href="#contenuti" title="Link to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lezioni</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="lectures/introduction.html">1. Introduzione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lectures/importance_sampling.html">2. Importance sampling (Markov Chain Monte Carlo)</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Riferimenti bibliografici</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="zbiblio.html">Riferimenti bibliografici</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contatti esterni</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference external" href="https://mattiasotgia.github.io/">Mattia Sotgia</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://twitter.com/mattiasotgia1">&#64;mattiasotgia1 (twitter)</a></li>
-</ul>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="importance-sampling-markov-chain-monte-carlo">
+<h1><span class="section-number">2. </span>Importance sampling (Markov Chain Monte Carlo)<a class="headerlink" href="#importance-sampling-markov-chain-monte-carlo" title="Link to this heading">#</a></h1>
+<p>(23 febbraio 2024)</p>
+<p>Vogliamo calcolare nella pratica fenomeni di danneggiamento in reattori nucleari. Nasce questo in ambito <em>Los Alamos</em>, ovvero sullo studio della fissione nucleare. Il problema principale era quello di risolvere integrali in domini di dimensionalità molto elevata. In questi casi, algoritmi come <em>simpson</em> o il metodo dei trapezi fallisce rapidamente. Infatti data una dimensione <span class="math notranslate nohighlight">\(D\)</span>, campionando 10 punti (8 punti interni al dominio) si ha che il dominio di integrazione corrisponde in percentuale a</p>
+<div class="math notranslate nohighlight">
+\[
+    \left(\frac{8}{10}\right)^D \to 0 \quad \text{per $D$ grandi.}
+\]</div>
+<p>Quindi vediamo che è necessario trovare una soluzione alternativa, che permetta di non avere zeri o divergenze.</p>
+<p>Chiamiamo i punti dello spazio <span class="math notranslate nohighlight">\(\bf x\)</span>, il dominio di integrazione <span class="math notranslate nohighlight">\(\Omega\)</span>, e ci troviamo in uno spazio di dimensione <span class="math notranslate nohighlight">\(D\)</span>.</p>
+<p>Considerando una funzione su questo dominio, allora potremo calcolarne il valore come</p>
+<div class="math notranslate nohighlight">
+\[
+    \int_\Omega A({\bf x}) d {\bf x}
+\]</div>
+<p>Consideriamo una probabilità <span class="math notranslate nohighlight">\(p({\bf x})\)</span>, tale che questa è normalizzata a 1 e definita positiva. ridefinisco l’integrale precedente come</p>
+<div class="math notranslate nohighlight">
+\[
+    I = \int_\Omega \frac{A({\bf x})}{p({\bf x})} p({\bf x}) d {\bf x} = \int_\Omega G({\bf x}) p({\bf x}) d {\bf x}.
+\]</div>
+<p>Mi accorgo facilmente che questo corrisponde a voler calcolare il valor medio di <span class="math notranslate nohighlight">\(G\)</span> secondo la distribuzione di probabilità <span class="math notranslate nohighlight">\(p\)</span>. L’idea che allora mi viene in mente è quello di campionare lo spazio delle <span class="math notranslate nohighlight">\(\bf x\)</span> propozionalmente a <span class="math notranslate nohighlight">\(p\)</span>, lo campiono <span class="math notranslate nohighlight">\(M\)</span> volte, <span class="math notranslate nohighlight">\({\bf x_i}\)</span>, <span class="math notranslate nohighlight">\(i=1, 2,\dots,M\)</span>. Se ho campionato in modo corretto ottengo che</p>
+<div class="math notranslate nohighlight">
+\[
+    I\simeq \frac1M \sum_{i=1}^M G({\bf x_i}) = \frac1M \sum_{i=1}^M \frac{A({\bf x_i})}{p({\bf x_i})}
+\]</div>
+<p>Allora l’obiettivo principale è quello di identificare una <span class="math notranslate nohighlight">\(p\)</span> adeguata ad ottimizzare e rendere più vera possibile questa uguaglianza. La prima (e anche più semplice) scelta che mi viene è quella di considerare una distribuzione uniforme. Otteniamo allora che</p>
+<div class="math notranslate nohighlight">
+\[
+    I\simeq \frac VM \sum_{i=1}^M A({\bf x_i}).
+\]</div>
+<p>Chiameremmo questo caso il caso di <strong>campionamento semplice</strong>, e chiameremo invece ogni altro caso <strong>importance sampling</strong>, dove la distribuzione non è scelta a caso ma sarà scelta in funzione del modello di <span class="math notranslate nohighlight">\(A({\bf x})\)</span>.</p>
+<section id="catene-di-markov">
+<h2><span class="section-number">2.1. </span>Catene di Markov<a class="headerlink" href="#catene-di-markov" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -401,7 +394,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./content"
+            path: "./content/lectures"
         },
         predefinedOutput: true
     }
@@ -418,12 +411,21 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Introduzione</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="lectures/introduction.html"
+       href="../zbiblio.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Introduzione</p>
+        <p class="prev-next-title">Riferimenti bibliografici</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -443,10 +445,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-corso-in-breve">Il corso in breve</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenuti">Contenuti</a><ul class="nav section-nav flex-column">
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catene-di-markov">2.1. Catene di Markov</a></li>
 </ul>
   </nav></div>
 
@@ -492,8 +491,8 @@ By Mattia Sotgia
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
