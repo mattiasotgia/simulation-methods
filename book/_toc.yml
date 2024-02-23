@@ -6,8 +6,10 @@ root: content/index
 title: Introduzione
 parts:
 - caption: Lezioni
+  numbered: true
   chapters:
-  - file: content/lectures/introduction
+  - file: content/lectures/introduction.md
+  - file: content/lectures/importance_sampling.md
 # - caption: Approfondimenti
 - caption: Riferimenti bibliografici
   chapters:
