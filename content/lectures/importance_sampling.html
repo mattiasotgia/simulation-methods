@@ -452,6 +452,23 @@ document.write(`
 \]</div>
 <p>corrispondenti alla normalizzazione delle probabilità e anche delle probabilità di transizione.</p>
 </div>
+<p>Avremo che con questa nuova notazione la scrittura</p>
+<div class="math notranslate nohighlight">
+\[
+    p^{(1)} (i_0, i_1) = P_C^{(1)} (i_1 | i_0) p^{(0)} (i_0) \to p_{ij}^{(1)} = p_i^{(0)} \pi _{ij},
+\]</div>
+<p>ovvero si semplifica notevolmente. MA allora se mi chiedo quale è la probabilità di estrarre lo stato <span class="math notranslate nohighlight">\(j\)</span> all’estrazione 1, questa sarà data da</p>
+<div class="math notranslate nohighlight">
+\[ 
+    p_j^{(1)} = \sum_i p_i^{(0)} \pi _{ij},
+\]</div>
+<p>ovvero in notazione matriciale <span class="math notranslate nohighlight">\({\bf p}^{(1)} = {\bf p}^{(0)} \underline \pi\)</span>.</p>
+<p>Iterando allora ottengo che <span class="math notranslate nohighlight">\(\vec p^{(m)} = \vec p^{(0)} \underline \pi^{m}\)</span>, che mi dice allora che</p>
+<div class="math notranslate nohighlight">
+\[ 
+    \vec p^\text{eq} = \lim_{m\to\infty} \vec p^{(0)} \underline \pi^{m}.
+\]</div>
+<p>{}</p>
 </section>
 </section>
 </section>

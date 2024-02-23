@@ -132,6 +132,25 @@ $$
 corrispondenti alla normalizzazione delle probabilità e anche delle probabilità di transizione. 
 :::
 
+Avremo che con questa nuova notazione la scrittura 
+
+$$
+    p^{(1)} (i_0, i_1) = P_C^{(1)} (i_1 | i_0) p^{(0)} (i_0) \to p_{ij}^{(1)} = p_i^{(0)} \pi _{ij},
+$$
+
+ovvero si semplifica notevolmente. MA allora se mi chiedo quale è la probabilità di estrarre lo stato $j$ all'estrazione 1, questa sarà data da 
+
+$$ 
+    p_j^{(1)} = \sum_i p_i^{(0)} \pi _{ij},
+$$ 
+
+ovvero in notazione matriciale ${\bf p}^{(1)} = {\bf p}^{(0)} \underline \pi$. 
+
+Iterando allora ottengo che $\vec p^{(m)} = \vec p^{(0)} \underline \pi^{m}$, che mi dice allora che 
+
+$$ 
+    \vec p^\text{eq} = \lim_{m\to\infty} \vec p^{(0)} \underline \pi^{m}.
+$$
 
 
 
@@ -154,5 +173,4 @@ corrispondenti alla normalizzazione delle probabilità e anche delle probabilit�
 
 
 
-
-
+{}
