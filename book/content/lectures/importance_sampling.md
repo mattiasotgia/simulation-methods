@@ -97,7 +97,6 @@ $$
     P_C^{(M)} (i_M | i_{M-1}) 
     P_C^{(M-1)} (i_{M-1} | i_{M-2}) 
     P_C^{(M-2)} (i_{M-2} | i_{M-3}) 
-    P_C^{(M-3)} (i_{M-3} | i_{M-4}) 
     \dots 
     P_C^{(1)} (i_{1} | i_{0}) 
     p^{(0)} (i_0)
@@ -126,7 +125,7 @@ Con questa nuova notazione osserviamo che $p_i^{(0)}$ è un vettore con $\mathca
 
 
 $$
-    \sum_{i=1}^{\mathcal S} p_i^{(0)} = 1 \quad sum_{j=1}^{\mathcal S} \pi_{ij} = 1, 
+    \sum_{i=1}^{\mathcal S} p_i^{(0)} = 1 \quad \sum_{j=1}^{\mathcal S} \pi_{ij} = 1, 
 $$
 
 corrispondenti alla normalizzazione delle probabilità e anche delle probabilità di transizione. 
