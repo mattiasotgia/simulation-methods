@@ -77,7 +77,7 @@ $$
 
 Quello che invece voglio ottenere è di poter calcolare delle catene in cui l'estrazione è condizionata dai risultati precedenti. Non vorrei però che il risultato sia inlfuenzato da tutte le condizioni precedenti dall'inizio dei tempi, ma solo dalla condizione immediatamente precedente. 
 
-##### Teorema della probabilità congiunta
+### Teorema della probabilità congiunta
 
 :::{admonition} Da sistemare
 :class: warning
@@ -152,6 +152,82 @@ $$
 $$
 
 
+Osserviamo che per quanto detto in precedenza, allora tutte le probabilità saranno normalizzate ad uno. 
+
+### Monte Carlo con _importance sampling_
+
+Questometodo prevede di estrarre numeri per fare si che la distribuzione che si raggiunge sia la distribuzione di equilibrio, che vorremo essere in particolare per la fisica della materia distribuzione di Boltzmann. Questa la chiameremo $\vec p^\text{eq}$. Vorremmo che 
+
+$$ 
+    \vec p^\text{eq} = \lim_{m\to\infty} \vec p^{(0)} \underline \pi^{m}.
+$$
+
+a partire da ogni probabilità $p^{(0)}$ di partenza. Questo vuol dire 
+ 1. Scegliere appropriamente una $p^{(0)}$
+ 2. Fare andare la macchina, in modo che campionando stati successivi siano estratti secondo la probabilità $p^\text{eq}$.
+
+Perché questo avvenga dovrò costruire la matrice $\pi$ adeguatamente per avere l'efficenza massima (ovvero possibilmente per una convergenza rapida del limite). 
+
+Le possiibli soluzioni, ovvero le possibili $\pi$ che soddisfano questo limite, sono effettivamente infinite, e quello che noi vorremo fare è di sceglierne una in particolare che rispetti i vincoli richiesti, ma che dia una soluzione semplice tra quelle a disposizione. 
+
+La $\pi$ che costruiamo convergerà alla richiesta $\vec p^\text{eq}$ se soddisfa richieste di
+
+ 1. Ergodicità. Capacità di connettere stati diversi in un numero finito di passi successivi. Nel caso delle $\pi$ vuol dire che a partire da ogni stato di partenza $p^{(0)}$ sarà possibile raggiungere $\vec p^\text{eq}$. 
+ 2. Aperiodicità. Non si va ad intrappolare in cicli che non convergono.
+
+Date queste condizioni, quello che succede è che 
+
+__Teorema__. Se $\pi$ è _ergodica_ e _aperiodica_, allora esiste $\vec p^*$ tale che 
+
+$$
+    \lim_{m\to\infty} \vec p^{(0)} \pi^m = \vec p^*,
+$$
+
+per ogni $\vec p^{(0)}$. 
+
+Vogliamo che $\vec p^\text{eq} = \vec p^*$. Per avere ciò è necessario scegliere $\pi$ per cui $\vec p^\text{eq} \pi = \vec p^\text{eq}$. Infatti così ho che 
+
+$$
+    \vec p^\text{eq} \pi^m = \vec p^\text{eq} \implies \lim_{m\to\infty}\vec p^\text{eq} \pi = \vec p^\text{eq} \implies \text{Q.E.D.}
+$$
+
+Voglio costruire ora la $\pi$. Per fare ciò voglio introdurre il __bilancio dettagliato__. Questo implica una scelta di $\pi$ data da 
+
+$$
+    \vec p^\text{eq}_{i} \pi_{ij} = \vec p^\text{eq}_{j} \pi_{ji}.
+$$
+
+Questo corrisponde ad una conservazione del flusso. La transizione $i\to j$ è equivalente a $j\to i$.
+
+Per trovare allora la forma di $\pi$ possiamom considerare le somme su $i$, ovvero 
+
+$$
+    \sum_i \vec p^\text{eq}_{i} \pi_{ij} = \sum_i \vec p^\text{eq}_{j} \pi_{ji} = \vec p^\text{eq}_{j} \sum_i \pi_{ji} = \vec p^\text{eq}_{j}.
+$$
+
+## Algoritmo di Metropolis
+
+Differenziamo tra elementi non diagonali e gli elementi diagonali.
+
+ - Elementi off-diagonal.
+
+   $$
+       \vec p^\text{eq}_{j} < \vec p^\text{eq}_{j} \implies \pi_{ij} = \alpha_{ij} \frac{\vec p^\text{eq}_{j}}{\vec p^\text{eq}_{i}}
+   $$
+   
+   Dove $\alpha_{ij}$ è una matrice simmetrica, e 
+
+   $$
+       \vec p^\text{eq}_{j} \geq \vec p^\text{eq}_{j} \implies \pi_{ij} = \alpha_{ij}
+   $$
+
+ - Elementi diagonal
+
+   $$
+       \pi_{ij} = 1 - \sum_{k\neq i} \pi_{ik}
+   $$
+
+Questa scelta soddisfa il bilancio dettagliato. 
 
 
 
@@ -172,4 +248,28 @@ $$
 
 
 
-{}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
