@@ -338,7 +338,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-con-importance-sampling">2.1.2. Monte Carlo con <em>importance sampling</em></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-di-metropolis">2.2. Algoritmo di Metropolis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-di-metropolis">2.2. Algoritmo di Metropolis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modello">2.2.1. Modello</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ma-quindi-cosa-andiamo-a-studiare">2.2.1.1. Ma quindi cosa andiamo a studiare?</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -538,6 +544,37 @@ document.write(`
 </li>
 </ul>
 <p>Questa scelta soddisfa il bilancio dettagliato.</p>
+<section id="modello">
+<h3><span class="section-number">2.2.1. </span>Modello<a class="headerlink" href="#modello" title="Link to this heading">#</a></h3>
+<p>Il modello che andiamo a studiare è sufficentemente semplice, ma che comporta alcune sottigliezze.</p>
+<p>Consideraimo <span class="math notranslate nohighlight">\(N\)</span> spin. Avenso spin <span class="math notranslate nohighlight">\(\frac12\)</span> allora gli stati sono <span class="math notranslate nohighlight">\(S=2^N\)</span>. la configurazione singola è data da <span class="math notranslate nohighlight">\(s_i\)</span>, e l’insieme delle configurazioni è <span class="math notranslate nohighlight">\(\{s_i\}\)</span>.</p>
+<p>Allora il valore medio di una funzione <span class="math notranslate nohighlight">\(G\)</span> è dato da</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle G \rangle = \frac1Z \sum{\{s_i\}} G(\{s_i\}) e^{-\beta \mathcal H (\{s_i\})} = \sum_{\{s_i\}} G(\{s_i\}) p(\{s_i\}),
+\]</div>
+<p>dove</p>
+<div class="math notranslate nohighlight">
+\[
+    p(\{s_i\}) = \frac1Z e^{-\beta \mathcal H}
+\]</div>
+<p>Gli addendi significativi della somma del valore di aspettazione sono i valori in cui si ha l’energia bassa, in quanto per energia alta questi sono pesati su una probabilità molto bassa (che va con energie all’esponente). Questo sembra un problema che è perfetto da risolvere con un algoritmo di importance sampling.</p>
+<section id="ma-quindi-cosa-andiamo-a-studiare">
+<h4><span class="section-number">2.2.1.1. </span>Ma quindi cosa andiamo a studiare?<a class="headerlink" href="#ma-quindi-cosa-andiamo-a-studiare" title="Link to this heading">#</a></h4>
+<p>Studiaremo un sistema che è detto di <em>gas reticolare</em>. Consideriammo un array di SITI (<span class="math notranslate nohighlight">\(M\)</span> siti, con <span class="math notranslate nohighlight">\(M = \ell \times \ell\)</span>). Considero <span class="math notranslate nohighlight">\(N\)</span> siti degli <span class="math notranslate nohighlight">\(M\)</span> a disposizione (<span class="math notranslate nohighlight">\(N&lt;M\)</span>) occupati da particelle.</p>
+<p>Fissata la configurazione iniziale, quello che vogliamo ottenere è di poter passare da una configurazione alla configurazione successiva. Quello che ci serve è quindi una regola, che sarà quella che verrà rappresentata dalla <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>Definiamo allora la regola.</p>
+<ul>
+<li><p>Considero una temepratura <span class="math notranslate nohighlight">\(T\)</span> iniziale.</p></li>
+<li><p>Queste particelle interagiscono, con una intensità <span class="math notranslate nohighlight">\(\mathcal H \propto J\)</span>. L’interazione è fatta in modo che due particelle prime vicine possano scambiare una particella. L’interazione sarà data da
+$<span class="math notranslate nohighlight">\(
+    j \sum (\text{coppie di primi vicini}).
+\)</span>$</p>
+<p>Nel contare le coppie di primi vicini devo considerare che le condizioni al contorno spesso saaranno fissate periodiche.</p>
+</li>
+</ul>
+</section>
+</section>
 </section>
 </section>
 
@@ -610,7 +647,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-con-importance-sampling">2.1.2. Monte Carlo con <em>importance sampling</em></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-di-metropolis">2.2. Algoritmo di Metropolis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-di-metropolis">2.2. Algoritmo di Metropolis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modello">2.2.1. Modello</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ma-quindi-cosa-andiamo-a-studiare">2.2.1.1. Ma quindi cosa andiamo a studiare?</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
