@@ -229,11 +229,40 @@ Differenziamo tra elementi non diagonali e gli elementi diagonali.
 
 Questa scelta soddisfa il bilancio dettagliato. 
 
+### Modello
 
+Il modello che andiamo a studiare è sufficentemente semplice, ma che comporta alcune sottigliezze. 
 
+Consideraimo $N$ spin. Avenso spin $\frac12$ allora gli stati sono $S=2^N$. la configurazione singola è data da $s_i$, e l'insieme delle configurazioni è $\{s_i\}$. 
 
+Allora il valore medio di una funzione $G$ è dato da 
 
+$$
+    \langle G \rangle = \frac1Z \sum{\{s_i\}} G(\{s_i\}) e^{-\beta \mathcal H (\{s_i\})} = \sum_{\{s_i\}} G(\{s_i\}) p(\{s_i\}),
+$$
 
+dove 
+
+$$
+    p(\{s_i\}) = \frac1Z e^{-\beta \mathcal H}
+$$
+
+Gli addendi significativi della somma del valore di aspettazione sono i valori in cui si ha l'energia bassa, in quanto per energia alta questi sono pesati su una probabilità molto bassa (che va con energie all'esponente). Questo sembra un problema che è perfetto da risolvere con un algoritmo di importance sampling. 
+
+#### Ma quindi cosa andiamo a studiare?
+
+Studiaremo un sistema che è detto di _gas reticolare_. Consideriammo un array di SITI ($M$ siti, con $M = \ell \times \ell$). Considero $N$ siti degli $M$ a disposizione ($N<M$) occupati da particelle. 
+
+Fissata la configurazione iniziale, quello che vogliamo ottenere è di poter passare da una configurazione alla configurazione successiva. Quello che ci serve è quindi una regola, che sarà quella che verrà rappresentata dalla $\pi$. 
+
+Definiamo allora la regola. 
+ - Considero una temepratura $T$ iniziale.
+ - Queste particelle interagiscono, con una intensità $\mathcal H \propto J$. L'interazione è fatta in modo che due particelle prime vicine possano scambiare una particella. L'interazione sarà data da
+   $$
+       j \sum (\text{coppie di primi vicini}).
+   $$
+
+   Nel contare le coppie di primi vicini devo considerare che le condizioni al contorno spesso saaranno fissate periodiche. 
 
 
 
