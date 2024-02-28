@@ -335,8 +335,10 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catene-di-markov">2.1. Catene di Markov</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-della-probabilita-congiunta">2.1.1. Teorema della probabilità congiunta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-con-importance-sampling">2.1.2. Monte Carlo con <em>importance sampling</em></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-di-metropolis">2.2. Algoritmo di Metropolis</a></li>
 </ul>
             </nav>
         </div>
@@ -467,8 +469,75 @@ document.write(`
 \[ 
     \vec p^\text{eq} = \lim_{m\to\infty} \vec p^{(0)} \underline \pi^{m}.
 \]</div>
-<p>{}</p>
+<p>Osserviamo che per quanto detto in precedenza, allora tutte le probabilità saranno normalizzate ad uno.</p>
 </section>
+<section id="monte-carlo-con-importance-sampling">
+<h3><span class="section-number">2.1.2. </span>Monte Carlo con <em>importance sampling</em><a class="headerlink" href="#monte-carlo-con-importance-sampling" title="Link to this heading">#</a></h3>
+<p>Questometodo prevede di estrarre numeri per fare si che la distribuzione che si raggiunge sia la distribuzione di equilibrio, che vorremo essere in particolare per la fisica della materia distribuzione di Boltzmann. Questa la chiameremo <span class="math notranslate nohighlight">\(\vec p^\text{eq}\)</span>. Vorremmo che</p>
+<div class="math notranslate nohighlight">
+\[ 
+    \vec p^\text{eq} = \lim_{m\to\infty} \vec p^{(0)} \underline \pi^{m}.
+\]</div>
+<p>a partire da ogni probabilità <span class="math notranslate nohighlight">\(p^{(0)}\)</span> di partenza. Questo vuol dire</p>
+<ol class="arabic simple">
+<li><p>Scegliere appropriamente una <span class="math notranslate nohighlight">\(p^{(0)}\)</span></p></li>
+<li><p>Fare andare la macchina, in modo che campionando stati successivi siano estratti secondo la probabilità <span class="math notranslate nohighlight">\(p^\text{eq}\)</span>.</p></li>
+</ol>
+<p>Perché questo avvenga dovrò costruire la matrice <span class="math notranslate nohighlight">\(\pi\)</span> adeguatamente per avere l’efficenza massima (ovvero possibilmente per una convergenza rapida del limite).</p>
+<p>Le possiibli soluzioni, ovvero le possibili <span class="math notranslate nohighlight">\(\pi\)</span> che soddisfano questo limite, sono effettivamente infinite, e quello che noi vorremo fare è di sceglierne una in particolare che rispetti i vincoli richiesti, ma che dia una soluzione semplice tra quelle a disposizione.</p>
+<p>La <span class="math notranslate nohighlight">\(\pi\)</span> che costruiamo convergerà alla richiesta <span class="math notranslate nohighlight">\(\vec p^\text{eq}\)</span> se soddisfa richieste di</p>
+<ol class="arabic simple">
+<li><p>Ergodicità. Capacità di connettere stati diversi in un numero finito di passi successivi. Nel caso delle <span class="math notranslate nohighlight">\(\pi\)</span> vuol dire che a partire da ogni stato di partenza <span class="math notranslate nohighlight">\(p^{(0)}\)</span> sarà possibile raggiungere <span class="math notranslate nohighlight">\(\vec p^\text{eq}\)</span>.</p></li>
+<li><p>Aperiodicità. Non si va ad intrappolare in cicli che non convergono.</p></li>
+</ol>
+<p>Date queste condizioni, quello che succede è che</p>
+<p><strong>Teorema</strong>. Se <span class="math notranslate nohighlight">\(\pi\)</span> è <em>ergodica</em> e <em>aperiodica</em>, allora esiste <span class="math notranslate nohighlight">\(\vec p^*\)</span> tale che</p>
+<div class="math notranslate nohighlight">
+\[
+    \lim_{m\to\infty} \vec p^{(0)} \pi^m = \vec p^*,
+\]</div>
+<p>per ogni <span class="math notranslate nohighlight">\(\vec p^{(0)}\)</span>.</p>
+<p>Vogliamo che <span class="math notranslate nohighlight">\(\vec p^\text{eq} = \vec p^*\)</span>. Per avere ciò è necessario scegliere <span class="math notranslate nohighlight">\(\pi\)</span> per cui <span class="math notranslate nohighlight">\(\vec p^\text{eq} \pi = \vec p^\text{eq}\)</span>. Infatti così ho che</p>
+<div class="math notranslate nohighlight">
+\[
+    \vec p^\text{eq} \pi^m = \vec p^\text{eq} \implies \lim_{m\to\infty}\vec p^\text{eq} \pi = \vec p^\text{eq} \implies \text{Q.E.D.}
+\]</div>
+<p>Voglio costruire ora la <span class="math notranslate nohighlight">\(\pi\)</span>. Per fare ciò voglio introdurre il <strong>bilancio dettagliato</strong>. Questo implica una scelta di <span class="math notranslate nohighlight">\(\pi\)</span> data da</p>
+<div class="math notranslate nohighlight">
+\[
+    \vec p^\text{eq}_{i} \pi_{ij} = \vec p^\text{eq}_{j} \pi_{ji}.
+\]</div>
+<p>Questo corrisponde ad una conservazione del flusso. La transizione <span class="math notranslate nohighlight">\(i\to j\)</span> è equivalente a <span class="math notranslate nohighlight">\(j\to i\)</span>.</p>
+<p>Per trovare allora la forma di <span class="math notranslate nohighlight">\(\pi\)</span> possiamom considerare le somme su <span class="math notranslate nohighlight">\(i\)</span>, ovvero</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_i \vec p^\text{eq}_{i} \pi_{ij} = \sum_i \vec p^\text{eq}_{j} \pi_{ji} = \vec p^\text{eq}_{j} \sum_i \pi_{ji} = \vec p^\text{eq}_{j}.
+\]</div>
+</section>
+</section>
+<section id="algoritmo-di-metropolis">
+<h2><span class="section-number">2.2. </span>Algoritmo di Metropolis<a class="headerlink" href="#algoritmo-di-metropolis" title="Link to this heading">#</a></h2>
+<p>Differenziamo tra elementi non diagonali e gli elementi diagonali.</p>
+<ul>
+<li><p>Elementi off-diagonal.</p>
+<div class="math notranslate nohighlight">
+\[
+       \vec p^\text{eq}_{j} &lt; \vec p^\text{eq}_{j} \implies \pi_{ij} = \alpha_{ij} \frac{\vec p^\text{eq}_{j}}{\vec p^\text{eq}_{i}}
+   \]</div>
+<p>Dove <span class="math notranslate nohighlight">\(\alpha_{ij}\)</span> è una matrice simmetrica, e</p>
+<div class="math notranslate nohighlight">
+\[
+       \vec p^\text{eq}_{j} \geq \vec p^\text{eq}_{j} \implies \pi_{ij} = \alpha_{ij}
+   \]</div>
+</li>
+<li><p>Elementi diagonal</p>
+<div class="math notranslate nohighlight">
+\[
+       \pi_{ij} = 1 - \sum_{k\neq i} \pi_{ik}
+   \]</div>
+</li>
+</ul>
+<p>Questa scelta soddisfa il bilancio dettagliato.</p>
 </section>
 </section>
 
@@ -538,8 +607,10 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catene-di-markov">2.1. Catene di Markov</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-della-probabilita-congiunta">2.1.1. Teorema della probabilità congiunta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-con-importance-sampling">2.1.2. Monte Carlo con <em>importance sampling</em></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-di-metropolis">2.2. Algoritmo di Metropolis</a></li>
 </ul>
   </nav></div>
 
